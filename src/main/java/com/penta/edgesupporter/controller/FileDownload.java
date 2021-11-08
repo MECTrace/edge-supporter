@@ -3,7 +3,8 @@ package com.penta.edgesupporter.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
-import java.io.FileInputStream;
 
 @RestController
 @RequiredArgsConstructor
@@ -33,15 +33,16 @@ public class FileDownload {
         File dir = new File(fileManager.getVehicleLocation().toString());
         File[] fileList = dir.listFiles();
 
-        InputStreamResource resource = null;
         long fileLength = 0L;
 
         for(File file : fileList) {
             if(filehash.equals(fileManager.getHash(file))) {
-                resource = new InputStreamResource(new FileInputStream(file));
+                log.info("일치하는 파일 :: {}", file.getName());
+                Resource resource = new FileSystemResource(file);
                 fileLength = file.length();
+
                 return ResponseEntity.ok()
-                        .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+                        .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + resource.getFilename() + "\"")
                         .contentLength(fileLength)
                         .contentType(MediaType.APPLICATION_OCTET_STREAM)
                         .body(resource);
