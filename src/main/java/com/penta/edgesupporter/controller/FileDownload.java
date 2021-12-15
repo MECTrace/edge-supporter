@@ -38,9 +38,9 @@ public class FileDownload {
         log.info("----giveDataFileToCentral----");
 
         /*파일명으로 파일 찾기*/
-        File f = new File(fileManager.getVehicleLocation().toString()+"/"+filehash+".csv.gz");
+        File f = new File(fileManager.getVehicleLocation().toString() + "/" + filehash + ".csv.gz");
 
-        if(f.exists()) {
+        if (f.exists()) {
 
             /*
              프록시 환경 또는 클라우드 위에 있는 웹 응용 프로그램의 경우 HTTP 요청 헤더 X-Forwarded-For(XFF)를 통해 클라이언트 IP 주소를 가져와야 한다.
@@ -53,23 +53,15 @@ public class FileDownload {
             long fileLength = f.length();
 
             /*
-            * tracing history를 남기기 위해 edge로 소켓 통신
-            * format
-            * {[{sptoedge9812::DATA_ID::RECEIVED_TIME::CLIENT_IP::}]}
-            */
+             * tracing history를 남기기 위해 edge로 소켓 통신
+             * format
+             * {[{sptoedge9812::DATA_ID::RECEIVED_TIME::CLIENT_IP::}]}
+             */
 
-            try (Socket socket = new Socket("127.0.0.1", 17300);
-                 OutputStream output = socket.getOutputStream();) {
-                //{[{REQ::ID::REQ_CODE::REQ_DATA}]}
-                String reqString = "{[{sptoedge9812::" + filehash + "::"+time.toString()+"::" + clientIP + "::}]}";
-                byte[] data = reqString.getBytes(StandardCharsets.US_ASCII);
-                output.write(data);
-                output.flush();
-            } catch (UnknownHostException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            String reqString = "{[{sptoedge9812::" + filehash + "::" + time.toString() + "::" + clientIP + "::}]}";
+            String hostIP = "127.0.0.1";
+            int port = 17300;
+            connectSocket(reqString, hostIP, port);
 
             return ResponseEntity.ok()
                     .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + resource.getFilename() + "\"")
@@ -78,29 +70,36 @@ public class FileDownload {
                     .body(resource);
         }
 
-
-        /* 파일 해시로 파일 찾기 */
-        /*
-
-        File dir = new File(fileManager.getVehicleLocation().toString());
-        File[] fileList = dir.listFiles();
-
-        for(File file : fileList) {
-            if(filehash.equals(fileManager.getHash(file))) {
-                log.info("일치하는 파일 :: {}", file.getName());
-                Resource resource = new FileSystemResource(file);
-                fileLength = file.length();
-
-                return ResponseEntity.ok()
-                        .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + resource.getFilename() + "\"")
-                        .contentLength(fileLength)
-                        .contentType(MediaType.APPLICATION_OCTET_STREAM)
-                        .body(resource);
-            }
-        }
-         */
-
         return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
+    }
+
+    @DeleteMapping(value = "/data/{filehash}")
+    @SneakyThrows
+    public ResponseEntity<?> deleteAllDataInEdge(@PathVariable String filehash, HttpServletRequest req) {
+
+        String reqString = "{[{sptoedge1108::" + filehash + "::}]}";
+        String hostIP = "127.0.0.1";
+        int port = 17300;
+        connectSocket(reqString, hostIP, port);
+        return new ResponseEntity<>(HttpStatus.OK);
+
+    }
+
+
+    private void connectSocket(String reqString, String hostIP, int port) {
+
+        try (Socket socket = new Socket(hostIP, port);
+             OutputStream output = socket.getOutputStream();) {
+            byte[] data = reqString.getBytes(StandardCharsets.US_ASCII);
+            output.write(data);
+            output.flush();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
 
