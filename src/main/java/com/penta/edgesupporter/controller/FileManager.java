@@ -100,6 +100,22 @@ public class FileManager {
         return hexString.toString();
     }
 
+    private String byteToHex(byte num) {
+        char[] hexDigits = new char[2];
+        hexDigits[0] = Character.forDigit((num >> 4) & 0xF, 16);
+        hexDigits[1] = Character.forDigit((num & 0xF), 16);
+        return new String(hexDigits);
+    }
+
+    public String getHex(byte[] bytes) {
+        StringBuffer hexStringBuffer = new StringBuffer();
+        for (int i = 0; i < bytes.length; i++) {
+            hexStringBuffer.append(byteToHex(bytes[i]));
+        }
+        return hexStringBuffer.toString();
+    }
+
+
     @SneakyThrows(FileNotFoundException.class)
     public String getHash(File file) {
         return getHash(new FileInputStream(file));
