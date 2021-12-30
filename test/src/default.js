@@ -93,6 +93,9 @@ $.extend({
                 if(res.result == "send success"){
 					alert("Success");	
 				}
+                else{
+					alert("fail");	
+				}
 		});
     },
 });
