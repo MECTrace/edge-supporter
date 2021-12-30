@@ -76,4 +76,9 @@ $.extend({
         console.log(new_payload);
     },
 
+    $.ajax({
+        //register submit f
+    })
+
+
 });
