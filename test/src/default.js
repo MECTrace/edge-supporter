@@ -86,7 +86,8 @@ $.extend({
         $.ajax({
 				success: function(res){
             dataType: "json",
-		
-		});
+            data: {"idx": idx},
 
+		});
+    },
 });
