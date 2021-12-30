@@ -9,4 +9,8 @@ $(document).ready(function(){
 		var idx = $(this).attr("idx");
 		$.send_packet(idx);
 	});
+
+    $(".action_apply_rule").click(function(){
+		$.apply_rule();
+	});
 });
