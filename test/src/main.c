@@ -21,5 +21,5 @@ void SW_INT_1_isr(void)
 
 int main(void){
     #ifdef PEX_RTOS_INIT
-
+PEX_RTOS_INIT();
 }
