@@ -28,4 +28,8 @@ int main(void){
 
     INT_SYS_InstallHandler(SS1_IRQn, SW_INT_1_isr, (isr_t*)0U);
     INT_SYS_DisableIRQ_MC_All(PIT_Ch2_IRQn);
+
+     #ifdef PEX_RTOS_START
+    PEX_RTOS_START();                
+    #endif
 }
