@@ -52,5 +52,5 @@ $.extend({
 				console.log(res);	
 			}
 		});
-    
+    },
 });
