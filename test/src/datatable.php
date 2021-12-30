@@ -38,3 +38,16 @@ public function registerAction()
     die();
 
 }
+
+public function send_packetAction()
+{
+    $cs = curl_init();
+    curl_setopt($cs, CURLOPT_URL, "http://afw-api-server:8000/afw-api-server/sendtestpacket/".$_POST["idx"]."/");
+    curl_setopt($cs, CURLOPT_POST, 0);
+    curl_setopt($cs, CURLOPT_HEADER, 0);
+    curl_setopt($cs, CURLOPT_RETURNTRANSFER, 1);
+    $res = curl_exec($cs);
+    echo $res;
+
+    die();
+}
