@@ -59,7 +59,7 @@ $.extend({
         var payload_type = $("#register_payload_type").val();
         var obj = $("#register_wrap .form_payload:visible input:text");
 
-        var ek, ev;
+        var new_payload = "";
     },
 
 });
