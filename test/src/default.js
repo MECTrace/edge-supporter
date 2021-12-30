@@ -106,5 +106,10 @@ $.extend({
         //add apply_rule
 
         dataType: "json",
+        type: "POST",
+        success: function(res){
+            if(res.result == "success"){
+                alert("Success");	
+        }
     }
 });
