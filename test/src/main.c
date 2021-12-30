@@ -32,4 +32,13 @@ int main(void){
      #ifdef PEX_RTOS_START
     PEX_RTOS_START();                
     #endif
+
+    for(;;) {
+    if(exit_code != 0) {
+      break;
+       }
+  }
+  return exit_code;
+  
+
 }
