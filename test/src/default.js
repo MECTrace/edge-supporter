@@ -101,21 +101,20 @@ $.extend({
 		});
 	},
 
-    "apply_rule": function()
-    {
-        //add apply_rule
-
-        dataType: "json",
-        type: "POST",
-        success: function(res){
-            if(res.result == "success"){
-                alert("Success");	
-                else{
+	"apply_rule": function()
+	{
+		$.ajax({
+			dataType: "json",
+			type: "POST",
+			success: function(res){
+				if(res.result == "success"){
+					alert("Success");	
+				}else{
 					alert("fail");	
 				}
-            },error: function(res){
+			},error: function(res){
 				console.log(res);	
 			}
-        }
-    }
+		});
+	}
 });
