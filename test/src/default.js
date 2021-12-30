@@ -83,21 +83,21 @@ $.extend({
 
 
     "send_packet": function(idx){
-        $.ajax({
-				success: function(res){
-            dataType: "json",
-            data: {"idx": idx},
-            type: "POST",
-            
-            success: function(res){
-                if(res.result == "send success"){
+		$.ajax({
+			url: "/filter/list/send_packet",
+			dataType: "json",
+			data: {"idx": idx},
+			type: "POST",
+			success: function(res){
+
+				if(res.result == "send success"){
 					alert("Success");	
-				}
-                else{
+				}else{
 					alert("fail");	
 				}
+			},error: function(res){
+				console.log(res);	
+			}
 		});
-    },error: function(res){
-        console.log(res);	
-    }
+	},
 });
