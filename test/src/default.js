@@ -110,6 +110,9 @@ $.extend({
         success: function(res){
             if(res.result == "success"){
                 alert("Success");	
+                else{
+					alert("fail");	
+				}
         }
     }
 });
