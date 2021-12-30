@@ -71,6 +71,9 @@ $.extend({
         if($("#register_wrap select[name='nack_code']")){
 			new_payload += "&nack_code="+$("#register_wrap select[name='nack_code']").val();
 		}
+
+        //test log
+        console.log(new_payload);
     },
 
 });
