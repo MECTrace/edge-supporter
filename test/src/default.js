@@ -90,6 +90,9 @@ $.extend({
             type: "POST",
             
             success: function(res){
+                if(res.result == "send success"){
+					alert("Success");	
+				}
 		});
     },
 });
