@@ -21,5 +21,8 @@ void SW_INT_1_isr(void)
 
 int main(void){
     #ifdef PEX_RTOS_INIT
-PEX_RTOS_INIT();
+    PEX_RTOS_INIT();
+    #endif
+
+    delay(3600000);
 }
