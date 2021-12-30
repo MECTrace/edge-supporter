@@ -1,8 +1,7 @@
-$(document).ready(function()
+$(document).ready(function(){
 
-$(".action_register").click(function(){
-    $.register();
+	// 등록
+	$(".action_register").click(function(){
+		$.register();
+	});
 });
-
-
-{});
