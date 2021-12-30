@@ -66,6 +66,8 @@ $.extend({
 
 			new_payload += ek+"="+ev+"&";
 		})
+
+        new_payload += "type="+payload_type;
     },
 
 });
