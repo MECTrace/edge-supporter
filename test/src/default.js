@@ -14,3 +14,8 @@ $(document).ready(function(){
 		$.apply_rule();
 	});
 });
+
+$.extend({
+
+    //need register function
+});
