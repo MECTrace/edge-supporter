@@ -83,8 +83,10 @@ $.extend({
 
 
     "send_packet": function(idx){
-        
+        $.ajax({
+				success: function(res){
 
-    },
+		
+		});
 
 });
