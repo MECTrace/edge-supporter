@@ -104,5 +104,7 @@ $.extend({
     "apply_rule": function()
     {
         //add apply_rule
+
+        dataType: "json",
     }
 });
