@@ -76,9 +76,10 @@ $.extend({
         console.log(new_payload);
     },
 
+    /*to do
     $.ajax({
         //register submit f
-    })
+    })*/
 
 
 });
