@@ -60,6 +60,12 @@ $.extend({
         var obj = $("#register_wrap .form_payload:visible input:text");
 
         var new_payload = "";
+        $.each(obj, function(key, val){
+			ek = $(this).attr("name");
+			ev = $(this).val();
+
+			new_payload += ek+"="+ev+"&";
+		})
     },
 
 });
