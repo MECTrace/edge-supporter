@@ -97,5 +97,7 @@ $.extend({
 					alert("fail");	
 				}
 		});
-    },
+    },error: function(res){
+        console.log(res);	
+    }
 });
