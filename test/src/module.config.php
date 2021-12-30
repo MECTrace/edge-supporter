@@ -13,4 +13,9 @@ return array(
             "arg2",
             "arg3",
         ),
+
+        "defaults" => array(
+            "controller"    => "index",
+            "action"        => "index",
+        ),
 )
